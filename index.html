@@ -15,6 +15,8 @@
             background-size: cover;
             margin: 0;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .container {
@@ -26,6 +28,8 @@
             border-radius: 15px;
             border: 3px solid #bda27c;
             background-clip: padding-box;
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
@@ -56,7 +60,7 @@
             justify-content: space-between;
             margin: 30px 0;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         .timeline-item {
@@ -69,7 +73,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             position: relative;
             margin-bottom: 20px;
-            z-index: 1;
+            z-index: 10;
         }
 
         .timeline-item h3 {
@@ -83,7 +87,6 @@
             margin: 5px 0;
             color: #777;
             font-size: 1.2em;
-            
         }
 
         .map-area {
@@ -98,6 +101,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            z-index: 10;
         }
 
         .map-area img {
@@ -180,10 +184,22 @@
             background: #bda27c;
             z-index: 0;
         }
+
+        /* Fireworks container */
+        #fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 
 <body>
+    <div id="fireworks-container"></div>
     <div class="container">
         <h1>Kadriye & Ümit'in Düğünü</h1>
         <h2>25 - 26 Haziran</h2>
@@ -258,6 +274,51 @@
             </div>
         </div>
     </div>
+
+    <!-- Fireworks JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const container = document.getElementById('fireworks-container');
+            const fireworks = new Fireworks.default(container, {
+                speed: 2,
+                acceleration: 1.05,
+                friction: 0.98,
+                gravity: 1.5,
+                particles: 150,
+                trace: 3,
+                explosion: 5,
+                autoresize: true,
+                brightness: {
+                    min: 50,
+                    max: 80,
+                    decay: {
+                        min: 0.015,
+                        max: 0.03
+                    }
+                },
+                boundaries: {
+                    x: 50,
+                    y: 50,
+                    width: container.clientWidth,
+                    height: container.clientHeight
+                },
+                sound: {
+                    enable: true,
+                    files: [
+                        'https://fireworks.js.org/sounds/explosion0.mp3',
+                        'https://fireworks.js.org/sounds/explosion1.mp3',
+                        'https://fireworks.js.org/sounds/explosion2.mp3'
+                    ],
+                    volume: {
+                        min: 4,
+                        max: 8
+                    }
+                }
+            });
+            fireworks.start();
+        });
+    </script>
 </body>
 
 </html>
