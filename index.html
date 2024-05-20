@@ -17,17 +17,16 @@
             padding: 20px;
             min-height: 100vh;
             position: relative;
-
         }
 
         .dark-mode {
-            background-color: #2c2c2c;
-            color: #c0c0c0;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
         }
 
         .dark-mode .container {
-            background-color: #444;
-            border: 3px solid #9a6f47;
+            background-color: #2a2a2a;
+            border: 3px solid #b08968;
         }
 
         .dark-mode h1,
@@ -35,16 +34,16 @@
         .dark-mode h3,
         .dark-mode p,
         .dark-mode a {
-            color: #c0c0c0;
+            color: #e6e6e6;
         }
 
         .dark-mode .timeline-item {
-            background: #555;
-            border: 2px solid #9a6f47;
+            background: #333;
+            border: 2px solid #b08968;
         }
 
         .dark-mode .map-area {
-            border: 1px dashed #9a6f47;
+            border: 1px dashed #b08968;
         }
 
         .container {
@@ -66,7 +65,7 @@
             color: #bda27c;
             font-size: 4em;
             margin-bottom: 20px;
-            animation: textGlow 2s infinite;
+            animation: textGlow 2s infinite, fadeIn 3s ease-in-out;
         }
 
         h2 {
@@ -103,11 +102,6 @@
             position: relative;
             margin-bottom: 20px;
             z-index: 10;
-
-            i {
-                font-size: 1.75em;
-                margin-right: 6px;
-            }
         }
 
         .timeline-item h3 {
@@ -229,15 +223,13 @@
         }
 
         .dark-mode .dark-mode-btn {
-            background-color: #9a6f47;
-            color: #2c2c2c;
+            background-color: #b08968;
+            color: #1e1e1e;
         }
 
         .dark-mode-btn:hover {
-            background-color: #9a6f47;
+            background-color: #b08968;
         }
-
-   
 
         @keyframes textGlow {
             from {
@@ -246,6 +238,16 @@
 
             to {
                 text-shadow: 0 0 20px #bda27c, 0 0 30px #bda27c, 0 0 40px #bda27c, 0 0 50px #bda27c, 0 0 60px #bda27c;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
             }
         }
 
@@ -397,6 +399,7 @@
             });
             fireworks.start();
         });
+
         const toggleButton = document.getElementById('toggle-dark-mode');
         toggleButton.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
