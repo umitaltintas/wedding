@@ -102,6 +102,8 @@
             position: relative;
             margin-bottom: 20px;
             z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
         }
 
         .timeline-item h3 {
@@ -131,6 +133,10 @@
             justify-content: center;
             position: relative;
             z-index: 10;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            background-image: url('assets/map-bg.webp');
+            background-size:cover;
         }
 
         .map-area img {
@@ -144,6 +150,21 @@
             right: -20px;
             font-size: 1.5em;
             color: #bda27c;
+        }
+
+        .load-map-btn {
+            padding: 10px 20px;
+            background-color: #bda27c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .load-map-btn:hover {
+            background-color: #a78460;
         }
 
         .divider {
@@ -292,28 +313,18 @@
                     <h3>25 Haziran - Salı</h3>
                 </a>
                 <p>16:00 - 20:00: Mevlid-i Şerif & Yemek</p>
-                <div class="map-area">
-                    <a href="https://maps.app.goo.gl/wD5umNQQNfbWmp57A" target="_blank">
-                        <i class="fas fa-map-marker-alt location-icon"></i>
-                    </a>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71351.65542513724!2d27.304762378060023!3d39.91852209751414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b6d369318808f7%3A0xe5164fa4c7e9287!2zWWVuaWNlIFBhcmsgJiBEw7zEn8O8biBTYWxvbnU!5e0!3m2!1str!2str!4v1716129212186!5m2!1str!2str"
-                        allowfullscreen="" style="border: 0; width: 100%; height: 100%;" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-area" id="map1">
+                    <button class="load-map-btn"
+                        onclick="loadMap('map1', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71351.65542513724!2d27.304762378060023!3d39.91852209751414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b6d369318808f7%3A0xe5164fa4c7e9287!2zWWVuaWNlIFBhcmsgJiBEw7zEn8O8biBTYWxvbnU!5e0!3m2!1str!2str!4v1716129212186!5m2!1str!2str')">Konumu Görüntüle</button>
                 </div>
                 <div class="divider"></div>
                 <p>20:00 - 24:00: Kına</p>
                 <p>Yer: Yenice Park & Düğün Salonu</p>
                 <p style="font-style: italic; font-size: 0.8em; color: #bda27c; margin-top: 10px;"><em>*Kına, kadınlara
                         özeldir.</em></p>
-                <div class="map-area">
-                    <a href="https://maps.app.goo.gl/wD5umNQQNfbWmp57A" target="_blank">
-                        <i class="fas fa-map-marker-alt location-icon"></i>
-                    </a>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71351.65542513724!2d27.304762378060023!3d39.91852209751414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b6d369318808f7%3A0xe5164fa4c7e9287!2zWWVuaWNlIFBhcmsgJiBEw7zEn8O8biBTYWxvbnU!5e0!3m2!1str!2str!4v1716129212186!5m2!1str!2str"
-                        allowfullscreen="" style="border: 0; width: 100%; height: 100%;" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-area" id="map2">
+                    <button class="load-map-btn"
+                        onclick="loadMap('map2', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71351.65542513724!2d27.304762378060023!3d39.91852209751414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b6d369318808f7%3A0xe5164fa4c7e9287!2zWWVuaWNlIFBhcmsgJiBEw7zEn8O8biBTYWxvbnU!5e0!3m2!1str!2str!4v1716129212186!5m2!1str!2str')">Konumu Görüntüle</button>
                 </div>
             </div>
             <div class="horizontal-line"></div>
@@ -324,26 +335,16 @@
                     <h3>26 Haziran - Çarşamba</h3>
                 </a>
                 <p>12:00 - 18:00: Mevlid-i Şerif & Yemek</p>
-                <div class="map-area">
-                    <a href="https://maps.app.goo.gl/9iSVbKWuXzVCePFDA" target="_blank">
-                        <i class="fas fa-map-marker-alt location-icon"></i>
-                    </a>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d522.8631479261475!2d27.86232617554842!3d40.344203429005624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b42b9124386c37%3A0x7d7df5c97128962!2sEdincik%2C%209100.%20Sk.%2C%2010250%20Band%C4%B1rma%2FBal%C4%B1kesir!5e0!3m2!1str!2str!4v1716129054086!5m2!1str!2str"
-                        style="border: 0; width: 100%; height: 100%;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-area" id="map3">
+                    <button class="load-map-btn"
+                        onclick="loadMap('map3', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d522.8631479261475!2d27.86232617554842!3d40.344203429005624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b42b9124386c37%3A0x7d7df5c97128962!2sEdincik%2C%209100.%20Sk.%2C%2010250%20Band%C4%B1rma%2FBal%C4%B1kesir!5e0!3m2!1str!2str!4v1716129054086!5m2!1str!2str')">Konumu Görüntüle</button>
                 </div>
                 <div class="divider"></div>
                 <p>19:00 - 23:00: Düğün</p>
                 <p>Yer: STS Kır Düğün Bahçesi</p>
-                <div class="map-area">
-                    <a href="https://maps.app.goo.gl/SaMnYD89ud35NAAQ9" target="_blank">
-                        <i class="fas fa-map-marker-alt location-icon"></i>
-                    </a>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3040.0413897214357!2d27.986756699999997!3d40.3636066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b5d31d542ae8a1%3A0x5037fbc2ee341bd5!2zU1RTIEvEsXIgRMO8xJ_DvG4gQmFow6dlc2kgJiBSZXN0b3Jhbg!5e0!3m2!1str!2str!4v1716128799340!5m2!1str!2str"
-                        allowfullscreen="" style="border: 0; width: 100%; height: 100%;" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-area" id="map4">
+                    <button class="load-map-btn"
+                        onclick="loadMap('map4', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3040.0413897214357!2d27.986756699999997!3d40.3636066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b5d31d542ae8a1%3A0x5037fbc2ee341bd5!2zU1RTIEvEsXIgRMO8xJ_DvG4gQmFow6dlc2kgJiBSZXN0b3Jhbg!5e0!3m2!1str!2str!4v1716128799340!5m2!1str!2str')">Konumu Görüntüle</button>
                 </div>
             </div>
         </div>
@@ -364,7 +365,7 @@
         </div>
     </div>
 
-    <button id="toggle-dark-mode" class="dark-mode-btn"><i class="fas fa-moon"></i></button>
+    <button id="toggle-dark-mode" class="dark-mode-btn"><i class="fas fa-sun"></i></button>
 
     <!-- Fireworks JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
@@ -399,7 +400,30 @@
                 }
             });
             fireworks.start();
+
+            const timelineItems = document.querySelectorAll('.timeline-item');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+
         });
+
+        function loadMap(mapId, url) {
+            const mapArea = document.getElementById(mapId);
+            mapArea.innerHTML = `<iframe src="${url}" style="border: 0; width: 100%; height: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+        }
 
         const toggleButton = document.getElementById('toggle-dark-mode');
         toggleButton.addEventListener('click', () => {
