@@ -368,38 +368,39 @@
     <button id="toggle-dark-mode" class="dark-mode-btn"><i class="fas fa-sun"></i></button>
 
     <!-- Fireworks JS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const container = document.getElementById('fireworks-container');
-            const fireworks = new Fireworks.default(container, {
-                speed: 1,
-                acceleration: 1.05,
-                friction: 0.98,
-                gravity: 1.5,
-                particles: 50,
-                trace: 3,
-                explosion: 3,
-                autoresize: true,
-                brightness: {
-                    min: 50,
-                    max: 80,
-                    decay: {
-                        min: 0.015,
-                        max: 0.03
-                    }
-                },
-                boundaries: {
-                    x: 50,
-                    y: 50,
-                    width: container.clientWidth,
-                    height: container.clientHeight
-                },
-                sound: {
-                    enable: false,
-                }
-            });
-            fireworks.start();
+       <!-- Fireworks JS Library -->
+       <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+       <script>
+           document.addEventListener('DOMContentLoaded', (event) => {
+               const container = document.getElementById('fireworks-container');
+               const fireworks = new Fireworks.default(container, {
+                   speed: 2, /* Increased speed */
+                   acceleration: 1.02, /* Reduced acceleration */
+                   friction: 0.99, /* Increased friction */
+                   gravity: 1.2, /* Reduced gravity */
+                   particles: 30, /* Reduced number of particles */
+                   trace: 2, /* Reduced trace */
+                   explosion: 2, /* Reduced explosion */
+                   autoresize: true,
+                   brightness: {
+                       min: 50,
+                       max: 80,
+                       decay: {
+                           min: 0.015,
+                           max: 0.03
+                       }
+                   },
+                   boundaries: {
+                       x: 50,
+                       y: 50,
+                       width: container.clientWidth,
+                       height: container.clientHeight
+                   },
+                   sound: {
+                       enable: false,
+                   }
+               });
+               fireworks.start();
 
             const timelineItems = document.querySelectorAll('.timeline-item');
 
