@@ -132,7 +132,11 @@
         }
 
         .timeline-item {
-            width: 48%;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             box-sizing: border-box;
             background: linear-gradient(90deg, rgba(249, 249, 249, 1) 0%, rgba(215, 215, 215, 1) 100%);
             padding: 20px;
@@ -160,63 +164,104 @@
             font-size: 1.2em;
         }
 
+        .dark-mode .map-area {
+            border: 1px dashed #b08968;
+            background: linear-gradient(135deg, rgba(80, 80, 80, 0.5) 0%, rgba(50, 50, 50, 0.5) 50%, rgba(30, 30, 30, 0.5) 100%);
+            color: #e6e6e6; 
+            animation: shine 2s infinite alternate;
+            font-size: 1.2em; 
+        }
+        
         .map-area {
-            text-align: center;
             margin: 20px 0;
             margin-right: 0;
             border: 1px dashed #bda27c;
             padding: 10px;
             width: 90%;
-            height: 250px;
+            aspect-ratio: 1 / 1;
             display: flex;
-            align-items: center;
             justify-content: center;
-            position: relative;
+            align-items: center;
             z-index: 10;
-            background-color: #f0f0f0;
+            color: #4a4a4a; 
             border-radius: 10px;
-            background-image: url('assets/map-bg.webp');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-clip: padding-box;
-            background-size: 100% 100%;
-            
+            background: linear-gradient(135deg, rgba(240, 240, 240, 0.5) 0%, rgba(220, 220, 220, 0.5) 50%, rgba(200, 200, 200, 0.5) 100%);
+            background-blend-mode: overlay;
+            animation: shine 2s infinite alternate;
+            font-size: 1.2em; 
         }
-
-        .map-area img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-        }
-
-
-
+        
         .load-map-btn {
-            padding: 10px 20px;
-            background-color: transparent;
-            color: white;
+            background: linear-gradient(45deg, #bda27c, #b08968); 
+            color: #fff; 
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-
+            font-size: 1.2em; 
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            padding: 10px 20px; 
+            animation: shine 2s infinite alternate;
         }
-
-        .fa-eye {
-            font-size: xxx-large;
-            color: #bda27c;
-
+        
+        .load-map-btn:hover {
+            background: linear-gradient(45deg, #cc9966, #a87e5d); 
+            transform: scale(1.1);
         }
-
-        .fa-eye:hover {
-            color: #b08968;
-            text-shadow:
-                0 0 5px #b08968,
-                0 0 20px #b08968;
-
+        
+        
+        .fa-location-arrow {
+            color: #ffffff; 
+            font-size: 1.5em; 
+            animation: shine 2s infinite alternate;
         }
-
+        
+        .dark-mode .fa-location-arrow {
+            color: #e6e6e6; 
+            font-size: 1.5em; 
+            animation: shine 2s infinite alternate;
+        }
+        
+        @keyframes shine {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .timeline {
+                flex-direction: column;
+            }
+        
+            .timeline-item {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        
+            .horizontal-line {
+                display: none;
+            }
+        
+            h1 {
+                font-size: 3em; 
+            }
+        
+            h2 {
+                font-size: 1.2em; 
+            }
+        
+            .load-map-btn {
+                font-size: 0.9em; 
+                padding: 8px 16px; 
+            }
+        
+            .fa-location-arrow {
+                font-size: 1.2em; 
+            }
+        }
+        
 
 
         .divider {
@@ -226,20 +271,7 @@
             margin: 20px auto;
         }
 
-        @media (max-width: 768px) {
-            .timeline {
-                flex-direction: column;
-            }
 
-            .timeline-item {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .horizontal-line {
-                display: none;
-            }
-        }
 
         .contact-groups {
             display: flex;
@@ -317,6 +349,11 @@
             background: #bda27c;
             z-index: 0;
         }
+
+        .eye-button-container {
+            font-size: 1.3em;
+
+        }
     </style>
 </head>
 
@@ -338,20 +375,22 @@
                 <p class="time1"></p>
                 <div class="map-area map1">
                     <button class="load-map-btn">
-                        <i class="fas fa-solid fa-eye"></i>
+                        <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
                 </div>
                 <div class="divider"></div>
                 <p class="time2"></p>
                 <p class="place"></p>
-               
+
                 <div class="map-area map2">
                     <button class="load-map-btn">
-                        <i class="fas fa-solid fa-eye"></i>
+                        <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
+
+
                 </div>
                 <p style="font-style: italic; font-size: 0.8em; color: #bda27c; margin-top: 10px;"><em>*Kına, kadınlara
-                    özeldir.</em></p>
+                        özeldir.</em></p>
             </div>
             <div class="horizontal-line"></div>
             <div class="timeline-item" data-date="26 Haziran - Çarşamba"
@@ -367,7 +406,7 @@
                 <p class="time1"></p>
                 <div class="map-area map1">
                     <button class="load-map-btn">
-                        <i class="fas fa-solid fa-eye"></i>
+                        <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
                 </div>
                 <div class="divider"></div>
@@ -375,20 +414,20 @@
                 <p class="place"></p>
                 <div class="map-area map2">
                     <button class="load-map-btn">
-                        <i class="fas fa-solid fa-eye"></i>
+                        <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
                 </div>
             </div>
         </div>
         <h3>İletişim</h3>
         <div class="contact-groups">
-            <div class="contact-group" data-name="Mehmet İnal" data-phone="+905353763642">
+            <div class="contact-group" data-name="Mehmet İnal" data-phone="05353763642">
                 <div class="person">
                     <p class="name"></p>
                     <p><i class="fas fa-phone"></i>Telefon: <a class="phone-link" href=""></a></p>
                 </div>
             </div>
-            <div class="contact-group" data-name="Halil Altıntaş" data-phone="+905389899394">
+            <div class="contact-group" data-name="Halil Altıntaş" data-phone="05389899394">
                 <div class="person">
                     <p class="name"></p>
                     <p><i class="fas fa-phone"></i>Telefon: <a class="phone-link" href=""></a></p>
