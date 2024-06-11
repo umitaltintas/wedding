@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +7,14 @@
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y29JPML3V7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Y29JPML3V7');
+    </script>
 
     <link rel="stylesheet" href="index.css">
 </head>
@@ -20,13 +25,13 @@
         <h2>25 - 26 Haziran</h2>
         <div class="timeline">
             <div class="timeline-item">
-                <a target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240625T130000Z%2F20240625T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC%3A%20K%C4%B1na">
+                <a target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240625T130000Z%2F20240625T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC%3A%20K%C4%B1na" onclick="trackEvent('calendar', 'click', 'Add to Calendar Kına', 'Kına', 'guest')">
                     <i class="fas fa-solid fa-calendar"></i>
                     <h3 class="date"></h3>
                 </a>
                 <p class="time1"></p>
                 <div class="map-area map1">
-                    <button class="load-map-btn" onclick="trackEvent('map1', 'click', 'Show Map 1')">
+                    <button class="load-map-btn" onclick="trackEvent('map1', 'click', 'Show Map 1', 'Kına', 'guest')">
                         <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
                 </div>
@@ -34,7 +39,7 @@
                 <p class="time2"></p>
                 <p class="place"></p>
                 <div class="map-area map2">
-                    <button class="load-map-btn" onclick="trackEvent('map2', 'click', 'Show Map 2')">
+                    <button class="load-map-btn" onclick="trackEvent('map2', 'click', 'Show Map 2', 'Kına', 'guest')">
                         <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
                 </div>
@@ -42,13 +47,13 @@
             </div>
             <div class="horizontal-line"></div>
             <div class="timeline-item">
-                <a target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240626T130000Z%2F20240626T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC">
+                <a target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240626T130000Z%2F20240626T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC" onclick="trackEvent('calendar', 'click', 'Add to Calendar Düğün', 'Düğün', 'guest')">
                     <i class="fas fa-solid fa-calendar"></i>
                     <h3 class="date"></h3>
                 </a>
                 <p class="time1"></p>
                 <div class="map-area map1">
-                    <button class="load-map-btn" onclick="trackEvent('map3', 'click', 'Show Map 3')">
+                    <button class="load-map-btn" onclick="trackEvent('map3', 'click', 'Show Map 3', 'Düğün', 'guest')">
                         <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
                 </div>
@@ -56,7 +61,7 @@
                 <p class="time2"></p>
                 <p class="place"></p>
                 <div class="map-area map2">
-                    <button class="load-map-btn" onclick="trackEvent('map4', 'click', 'Show Map 4')">
+                    <button class="load-map-btn" onclick="trackEvent('map4', 'click', 'Show Map 4', 'Düğün', 'guest')">
                         <i class="fas fa-solid fa-location-arrow"></i> <span class="eye-button-container">Haritayı göster</span>
                     </button>
                 </div>
@@ -125,14 +130,9 @@
             });
         }
 
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
         fetch('config.json')
             .then(response => response.json())
             .then(config => {
-                gtag('config', config.googleAnalyticsId);
                 initializePage(config);
             })
             .catch(error => console.error('Error loading config:', error));
@@ -142,14 +142,15 @@
             mapArea.innerHTML = `<iframe src="${url}" style="border: 0; width: 100%; height: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
         }
 
-        function trackEvent(category, action, label) {
+        function trackEvent(category, action, label, eventType = '', userRole = '') {
             gtag('event', action, {
                 'event_category': category,
-                'event_label': label
+                'event_label': label,
+                'event_type': eventType,
+                'user_role': userRole
             });
         }
     </script>
 </body>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
-
 </html>
