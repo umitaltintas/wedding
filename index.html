@@ -10,21 +10,24 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadriye & Ümit'in Düğünü 2</title>
+    <title>Kadriye & Ümit'in Düğünü</title>
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <style>
         :root {
-            --primary: #1a1a1a;
-            --secondary: #f5f5f5;
-            --accent: #c9a96e;
-            --light-accent: #f4f1eb;
-            --white: #ffffff;
-            --gray: #666666;
-            --light-gray: #f8f8f8;
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff0080;
+            --neon-purple: #8a2be2;
+            --neon-green: #39ff14;
+            --neon-yellow: #ffff00;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --grid-color: #1a1a2e;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
         }
 
         * {
@@ -34,255 +37,481 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.7;
-            color: var(--primary);
-            background: var(--white);
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-white);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        body.dark-mode {
-            background: var(--primary);
-            color: var(--white);
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            animation: gridPulse 4s ease-in-out infinite alternate;
         }
 
-        .hero {
+        .neon-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-cyan);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(2) {
+            background: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+            animation-delay: 1s;
+        }
+        .particle:nth-child(3) {
+            background: var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple);
+            animation-delay: 2s;
+        }
+        .particle:nth-child(4) {
+            background: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+            animation-delay: 3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .cyber-header {
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23c9a96e" opacity="0.1"/><circle cx="75" cy="75" r="0.5" fill="%23c9a96e" opacity="0.1"/><circle cx="50" cy="10" r="0.3" fill="%23c9a96e" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
         }
 
-        .hero-content {
-            max-width: 600px;
-            animation: fadeInScale 1.5s ease-out;
-        }
-
-        .names {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 300;
-            letter-spacing: 0.1em;
+        .glitch-container {
+            position: relative;
             margin-bottom: 2rem;
-            position: relative;
         }
 
-        .names::after {
-            content: '';
-            position: absolute;
-            bottom: -1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 1px;
-            background: var(--accent);
-        }
-
-        .date {
-            font-size: 1.2rem;
-            font-weight: 200;
-            letter-spacing: 0.3em;
+        .glitch-text {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
             text-transform: uppercase;
-            color: var(--gray);
-            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            color: var(--text-white);
+            text-shadow:
+                0 0 5px var(--neon-cyan),
+                0 0 10px var(--neon-cyan),
+                0 0 15px var(--neon-cyan),
+                0 0 20px var(--neon-cyan);
+            animation: glitch 2s infinite;
         }
 
-        .scroll-indicator {
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
             position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
-            color: var(--accent);
-            animation: bounce 2s infinite;
-        }
-
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-
-        .section {
-            margin-bottom: 6rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 300;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::before {
-            content: '';
-            position: absolute;
-            top: 50%;
+            top: 0;
             left: 0;
-            width: 50px;
-            height: 1px;
-            background: var(--accent);
+            width: 100%;
+            height: 100%;
         }
 
-        .section-title::after {
+        .glitch-text::before {
+            animation: glitch-1 2s infinite;
+            color: var(--neon-pink);
+            z-index: -1;
+        }
+
+        .glitch-text::after {
+            animation: glitch-2 2s infinite;
+            color: var(--neon-cyan);
+            z-index: -2;
+        }
+
+        .cyber-subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            margin-bottom: 1rem;
+            animation: neonFlicker 3s infinite alternate;
+        }
+
+        .cyber-date {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 15px var(--neon-yellow);
+            border: 2px solid var(--neon-yellow);
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: scanLine 3s linear infinite;
+        }
+
+        .events-matrix {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .matrix-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .matrix-title::before {
+            content: '> ';
+            color: var(--neon-green);
+        }
+
+        .matrix-title::after {
+            content: ' <';
+            color: var(--neon-green);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+        }
+
+        .cyber-card {
+            background: linear-gradient(145deg,
+                rgba(26, 26, 46, 0.9),
+                rgba(5, 5, 5, 0.9)
+            );
+            border: 2px solid var(--neon-cyan);
+            border-radius: 0;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(5deg);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .cyber-card::before {
             content: '';
             position: absolute;
-            top: 50%;
-            right: 0;
-            width: 50px;
-            height: 1px;
-            background: var(--accent);
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(0, 255, 255, 0.1),
+                transparent
+            );
+            transition: left 0.5s ease;
         }
 
-        .event {
-            background: var(--light-gray);
+        .cyber-card:hover::before {
+            left: 100%;
+        }
+
+        .cyber-card:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-10px);
+            border-color: var(--neon-pink);
+            box-shadow:
+                0 0 30px rgba(255, 0, 128, 0.5),
+                inset 0 0 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 2rem;
-            border-radius: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--neon-cyan);
+            padding-bottom: 1rem;
         }
 
-        .dark-mode .event {
-            background: #2a2a2a;
+        .event-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--neon-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-white);
+            box-shadow: 0 0 20px var(--neon-pink);
+            animation: iconPulse 2s infinite;
         }
 
-        .event:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .event-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
         }
 
-        .event-header {
-            background: var(--white);
-            padding: 2rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .dark-mode .event-header {
-            background: #333;
-            border-bottom: 1px solid #444;
-        }
-
-        .event-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        .event-body {
-            padding: 2rem;
-        }
-
-        .event-details {
+        .data-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .detail {
-            text-align: center;
+        .data-cell {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid var(--neon-cyan);
+            padding: 1rem;
+            position: relative;
         }
 
-        .detail-label {
+        .data-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .data-label {
             font-size: 0.8rem;
-            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--gray);
+            color: var(--neon-green);
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
-        .detail-value {
+        .data-value {
             font-size: 1.1rem;
-            font-weight: 300;
+            font-weight: 500;
+            color: var(--text-white);
         }
 
-        .btn {
+        .cyber-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .neo-btn {
             background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 1rem 2rem;
-            font-size: 0.9rem;
-            font-weight: 300;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 1rem 1.5rem;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
-            margin: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .dark-mode .btn {
-            border-color: var(--white);
-            color: var(--white);
+        .neo-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-cyan);
+            transition: left 0.3s ease;
+            z-index: -1;
         }
 
-        .btn:hover {
-            background: var(--primary);
-            color: var(--white);
+        .neo-btn:hover::before {
+            left: 0;
         }
 
-        .dark-mode .btn:hover {
-            background: var(--white);
-            color: var(--primary);
+        .neo-btn:hover {
+            color: var(--dark-bg);
+            text-shadow: none;
+            box-shadow: 0 0 20px var(--neon-cyan);
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            text-align: center;
+        .neo-btn.secondary {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
         }
 
-        .contact-item {
+        .neo-btn.secondary::before {
+            background: var(--neon-pink);
+        }
+
+        .neo-btn.secondary:hover {
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .warning-msg {
+            background: rgba(255, 0, 128, 0.1);
+            border: 1px solid var(--neon-pink);
+            border-left: 4px solid var(--neon-pink);
+            padding: 1rem;
+            margin-top: 1.5rem;
+            font-style: italic;
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
+            position: relative;
+        }
+
+        .warning-msg::before {
+            content: '⚠ WARNING: ';
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .terminal-section {
+            padding: 5rem 0;
+            background: rgba(5, 5, 5, 0.8);
+            border-top: 2px solid var(--neon-green);
+            border-bottom: 2px solid var(--neon-green);
+        }
+
+        .terminal-window {
+            background: var(--darker-bg);
+            border: 2px solid var(--neon-green);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+        }
+
+        .terminal-header {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .terminal-body {
             padding: 2rem;
         }
 
-        .contact-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
+        .terminal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .terminal-title::before {
+            content: 'root@wedding:~$ ';
+            font-size: 1rem;
+            display: block;
             margin-bottom: 1rem;
         }
 
-        .contact-phone {
-            color: var(--gray);
+        .contact-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-terminal {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid var(--neon-cyan);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .contact-terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-top: 20px solid var(--neon-cyan);
+        }
+
+        .contact-id {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--neon-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .contact-data {
+            color: var(--text-gray);
             text-decoration: none;
-            font-weight: 300;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        .contact-phone:hover {
-            color: var(--primary);
+        .contact-data:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
         }
 
-        .dark-mode .contact-phone:hover {
-            color: var(--white);
-        }
-
-        .toggle {
+        .power-toggle {
             position: fixed;
             top: 2rem;
             right: 2rem;
-            background: transparent;
-            border: 1px solid var(--primary);
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
+            background: var(--darker-bg);
+            border: 2px solid var(--neon-cyan);
             border-radius: 50%;
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -291,176 +520,347 @@
             z-index: 1000;
         }
 
-        .dark-mode .toggle {
-            border-color: var(--white);
-            color: var(--white);
+        .power-toggle:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-cyan);
+            transform: scale(1.1);
         }
 
-        .toggle:hover {
-            background: var(--primary);
-            color: var(--white);
+        .power-toggle.active {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
         }
 
-        .dark-mode .toggle:hover {
-            background: var(--white);
-            color: var(--primary);
+        .power-toggle.active:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
         }
 
         .map-container {
             height: 300px;
             margin-top: 1rem;
-            background: #f0f0f0;
+            background: var(--darker-bg);
+            border: 2px solid var(--neon-cyan);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); opacity: 1; }
+            10% { transform: translate(-2px, -2px); opacity: 0.8; }
+            20% { transform: translate(2px, 2px); opacity: 0.8; }
+            30% { transform: translate(-2px, 2px); opacity: 0.8; }
+            40% { transform: translate(2px, -2px); opacity: 0.8; }
+            50% { transform: translate(0); opacity: 1; }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); opacity: 1; }
+            15% { transform: translate(2px, 2px); opacity: 0.7; }
+            25% { transform: translate(-2px, -2px); opacity: 0.7; }
+            35% { transform: translate(2px, -2px); opacity: 0.7; }
+            45% { transform: translate(-2px, 2px); opacity: 0.7; }
+            55% { transform: translate(0); opacity: 1; }
+        }
+
+        @keyframes neonFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes gridPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+
+        @keyframes scanLine {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-20px) translateX(10px); }
+            66% { transform: translateY(10px) translateX(-10px); }
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        body.retro-mode {
+            filter: sepia(1) hue-rotate(200deg) saturate(1.5);
         }
 
         @media (max-width: 768px) {
-            .content { padding: 3rem 1rem; }
-            .section-title::before,
-            .section-title::after { display: none; }
+            .events-grid { grid-template-columns: 1fr; }
+            .data-grid { grid-template-columns: 1fr; }
+            .cyber-actions { flex-direction: column; }
+            .contact-matrix { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="names">Kadriye & Ümit</h1>
-            <p class="date">25 - 26 Haziran</p>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    <div class="cyber-grid"></div>
+    <div class="neon-particles">
+        <div class="particle" style="top: 20%; left: 10%; animation-duration: 8s;"></div>
+        <div class="particle" style="top: 60%; left: 90%; animation-duration: 6s;"></div>
+        <div class="particle" style="top: 80%; left: 20%; animation-duration: 10s;"></div>
+        <div class="particle" style="top: 30%; left: 70%; animation-duration: 7s;"></div>
+    </div>
+    <div class="scan-line"></div>
 
-    <div class="content">
-        <section class="section">
-            <h2 class="section-title">Etkinlikler</h2>
-            
-            <div class="event">
-                <div class="event-header">
-                    <h3 class="event-name">Kına Gecesi</h3>
-                </div>
-                <div class="event-body">
-                    <div class="event-details">
-                        <div class="detail">
-                            <div class="detail-label">Zaman</div>
-                            <div class="detail-value time1"></div>
-                        </div>
-                        <div class="detail">
-                            <div class="detail-label">Yer</div>
-                            <div class="detail-value place"></div>
-                        </div>
-                    </div>
-                    <a class="btn" target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240625T130000Z%2F20240625T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC%3A%20K%C4%B1na">Takvime Ekle</a>
-                    <button class="btn map-btn" data-map="1">Harita</button>
-                    <div class="map-area map1"></div>
-                    <p style="margin-top: 1rem; font-style: italic; color: #666;">*Kına gecesi kadınlara özeldir.</p>
-                </div>
+    <div class="container">
+        <header class="cyber-header">
+            <div class="glitch-container">
+                <h1 class="glitch-text" data-text="KADRIYE & ÜMIT">KADRIYE & ÜMIT</h1>
             </div>
+            <p class="cyber-subtitle">UNION PROTOCOL INITIATED</p>
+            <div class="cyber-date">25 - 26 HAZIRAN</div>
+        </header>
 
-            <div class="event">
-                <div class="event-header">
-                    <h3 class="event-name">Düğün Töreni</h3>
-                </div>
-                <div class="event-body">
-                    <div class="event-details">
-                        <div class="detail">
-                            <div class="detail-label">Zaman</div>
-                            <div class="detail-value time2"></div>
+        <section class="events-matrix">
+            <h2 class="matrix-title">EVENT SEQUENCE</h2>
+
+            <div class="events-grid">
+                <div class="cyber-card">
+                    <div class="card-header">
+                        <div class="event-icon">
+                            <i class="fas fa-heart"></i>
                         </div>
-                        <div class="detail">
-                            <div class="detail-label">Yer</div>
-                            <div class="detail-value place2"></div>
+                        <h3 class="event-title">KINA.EXE</h3>
+                    </div>
+
+                    <div class="data-grid">
+                        <div class="data-cell">
+                            <div class="data-label">TIMESTAMP</div>
+                            <div class="data-value time1"></div>
+                        </div>
+                        <div class="data-cell">
+                            <div class="data-label">LOCATION</div>
+                            <div class="data-value place"></div>
                         </div>
                     </div>
-                    <a class="btn" target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240626T130000Z%2F20240626T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC">Takvime Ekle</a>
-                    <button class="btn map-btn" data-map="2">Harita</button>
+
+                    <div class="cyber-actions">
+                        <a class="neo-btn" target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240625T130000Z%2F20240625T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC%3A%20K%C4%B1na" onclick="trackEvent('calendar', 'click', 'Add to Calendar Kına', 'Kına', 'guest')">
+                            <i class="fas fa-download"></i>
+                            SYNC TO CALENDAR
+                        </a>
+                        <button class="neo-btn secondary map-btn" data-map="1">
+                            <i class="fas fa-satellite-dish"></i>
+                            GPS COORDS
+                        </button>
+                    </div>
+
+                    <div class="map-area map1"></div>
+
+                    <div class="warning-msg">
+                        FEMALE ACCESS ONLY
+                    </div>
+                </div>
+
+                <div class="cyber-card">
+                    <div class="card-header">
+                        <div class="event-icon">
+                            <i class="fas fa-rings-wedding"></i>
+                        </div>
+                        <h3 class="event-title">WEDDING.EXE</h3>
+                    </div>
+
+                    <div class="data-grid">
+                        <div class="data-cell">
+                            <div class="data-label">TIMESTAMP</div>
+                            <div class="data-value time2"></div>
+                        </div>
+                        <div class="data-cell">
+                            <div class="data-label">LOCATION</div>
+                            <div class="data-value place2"></div>
+                        </div>
+                    </div>
+
+                    <div class="cyber-actions">
+                        <a class="neo-btn" target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240626T130000Z%2F20240626T204500Z&details=&location=&text=Kadriye%20%26%20%C3%9Cmit%27in%20D%C3%BC%C4%9F%C3%BCn%C3%BC" onclick="trackEvent('calendar', 'click', 'Add to Calendar Düğün', 'Düğün', 'guest')">
+                            <i class="fas fa-download"></i>
+                            SYNC TO CALENDAR
+                        </a>
+                        <button class="neo-btn secondary map-btn" data-map="2">
+                            <i class="fas fa-satellite-dish"></i>
+                            GPS COORDS
+                        </button>
+                    </div>
+
                     <div class="map-area map2"></div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">İletişim</h2>
-            <div class="contact-grid"></div>
+        <section class="terminal-section">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    CONTACT DATABASE
+                </div>
+                <div class="terminal-body">
+                    <h2 class="terminal-title">AUTHORIZED PERSONNEL</h2>
+                    <div class="contact-matrix"></div>
+                </div>
+            </div>
         </section>
     </div>
 
-    <button class="toggle">
-        <i class="fas fa-moon"></i>
+    <button class="power-toggle">
+        <i class="fas fa-power-off"></i>
     </button>
 
     <script>
-        // Same JavaScript logic but simplified for the minimalist approach
         function initializePage(config) {
-            // Fill in event details
+            // Fill in event details - using the simpler structure from minimalist design
             document.querySelector('.time1').textContent = config.timelineData[0].time1;
             document.querySelector('.place').textContent = config.timelineData[0].place;
             document.querySelector('.time2').textContent = config.timelineData[1].time1;
             document.querySelector('.place2').textContent = config.timelineData[1].place;
 
             // Add contacts
-            const contactGrid = document.querySelector('.contact-grid');
-            config.contacts.forEach(contact => {
-                contactGrid.innerHTML += `
-                    <div class="contact-item">
-                        <div class="contact-name">${contact.name}</div>
-                        <a class="contact-phone" href="tel:${contact.phone}">${contact.phone}</a>
+            const contactMatrix = document.querySelector('.contact-matrix');
+            config.contacts.forEach((contact, index) => {
+                contactMatrix.innerHTML += `
+                    <div class="contact-terminal">
+                        <div class="contact-id">USER_${String(index + 1).padStart(3, '0')}: ${contact.name.toUpperCase()}</div>
+                        <a class="contact-data" href="tel:${contact.phone}">
+                            <i class="fas fa-phone"></i> ${contact.phone}
+                        </a>
                     </div>
                 `;
             });
 
-            // Intersection Observer
+            // Intersection Observer for animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'perspective(1000px) rotateX(0deg) translateY(0)';
                     }
                 });
             });
 
-            document.querySelectorAll('.section').forEach(section => {
-                observer.observe(section);
+            document.querySelectorAll('.cyber-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'perspective(1000px) rotateX(20deg) translateY(50px)';
+                card.style.transition = 'all 0.8s ease-out';
+                observer.observe(card);
             });
 
-            // Dark mode toggle
-            document.querySelector('.toggle').addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const icon = document.querySelector('.toggle i');
-                icon.classList.toggle('fa-moon');
-                icon.classList.toggle('fa-sun');
+            // Power toggle
+            document.querySelector('.power-toggle').addEventListener('click', () => {
+                document.body.classList.toggle('retro-mode');
+                const toggle = document.querySelector('.power-toggle');
+                toggle.classList.toggle('active');
             });
 
-            // Map buttons
+            // Map buttons - simplified like in minimalist design
             document.querySelectorAll('.map-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const mapIndex = e.target.dataset.map;
                     const mapUrl = config.timelineData[mapIndex - 1].map1;
                     const mapArea = document.querySelector(`.map${mapIndex}`);
-                    mapArea.innerHTML = `<div class="map-container"><iframe src="${mapUrl}" style="width:100%;height:100%;border:0;"></iframe></div>`;
+
+                    mapArea.innerHTML = `
+                        <div class="map-container">
+                            <div style="
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                height: 30px;
+                                background: var(--neon-cyan);
+                                color: var(--dark-bg);
+                                display: flex;
+                                align-items: center;
+                                padding: 0 1rem;
+                                font-family: 'Orbitron', monospace;
+                                font-weight: 700;
+                                font-size: 0.8rem;
+                                text-transform: uppercase;
+                                z-index: 2;
+                            ">
+                                <i class="fas fa-satellite-dish"></i>
+                                &nbsp; GPS COORDINATES LOCKED
+                            </div>
+                            <iframe
+                                src="${mapUrl}"
+                                style="width:100%;height:100%;border:0;margin-top:30px;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    `;
+
+                    // Track map click
+                    const eventName = mapIndex === '1' ? 'Kına' : 'Düğün';
+                    trackEvent(`map${mapIndex}`, 'click', `Show Map ${mapIndex}`, eventName, 'guest');
                 });
             });
+
+            // Add random particle generation
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+
+                const colors = ['--neon-cyan', '--neon-pink', '--neon-purple', '--neon-green'];
+                const color = `var(${colors[Math.floor(Math.random() * colors.length)]})`;
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 10px ${color}`;
+
+                document.querySelector('.neon-particles').appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, 8000);
+            }, 3000);
         }
 
         fetch('config.json')
             .then(response => response.json())
-            .then(config => initializePage(config))
-            .catch(error => console.error('Error:', error));
+            .then(config => {
+                initializePage(config);
+            })
+            .catch(error => {
+                console.error('Error loading config:', error);
+                // Fallback data matching the minimalist structure
+                const fallbackConfig = {
+                    timelineData: [
+                        {
+                            time1: "Saat belirtilmemiş",
+                            place: "Mekan belirtilmemiş",
+                            map1: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.4!2d29.1!3d41.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAyJzEyLjAiTiAyOcKwMDYnMDAuMCJF!5e0!3m2!1str!2str!4v1"
+                        },
+                        {
+                            time1: "Saat belirtilmemiş",
+                            place: "Mekan belirtilmemiş",
+                            map1: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3048.4!2d29.1!3d41.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAyJzEyLjAiTiAyOcKwMDYnMDAuMCJF!5e0!3m2!1str!2str!4v1"
+                        }
+                    ],
+                    contacts: [
+                        { name: "İletişim Kişisi 1", phone: "+90 XXX XXX XXXX" },
+                        { name: "İletişim Kişisi 2", phone: "+90 XXX XXX XXXX" }
+                    ]
+                };
+                initializePage(fallbackConfig);
+            });
 
         function trackEvent(category, action, label, eventType = '', userRole = '') {
             gtag('event', action, {
